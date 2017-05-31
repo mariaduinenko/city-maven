@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.web.WebView?>
+<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.citytransportanalysis.gui.Controller">
+    <children>
+        <MenuBar>
+            <menus>
+                <Menu mnemonicParsing="false" text="Файл">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Закрити" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <SplitPane dividerPositions="0.5">
+            <items>
+                <VBox>
+                    <children>
+                        <AnchorPane minWidth="-Infinity" prefHeight="250.0" prefWidth="742.0">
+                            <children>
+                                <Button fx:id="button" layoutX="17.0" layoutY="176.0" mnemonicParsing="false" onAction="#startModellingButtonClicked" prefHeight="52.0" prefWidth="227.0" text="Моделювати" />
+                                <Spinner fx:id="transportCountSpinner" editable="true" layoutX="165.0" layoutY="32.0" prefHeight="31.0" prefWidth="73.0">
+                                    <valueFactory>
+                                        <SpinnerValueFactory.IntegerSpinnerValueFactory max="100" min="1" />
+                                    </valueFactory>
+                                </Spinner>
+                                <Label fx:id="label1" layoutX="14.0" layoutY="37.0" text="Кількість транспорту" />
+                                <Label fx:id="label11" layoutX="14.0" layoutY="74.0" text="Час руху" />
+                                <TextField fx:id="timeFromTextField" layoutX="66.0" layoutY="70.0" prefHeight="31.0" prefWidth="62.0" text="06:00" />
+                                <Label fx:id="label111" layoutX="139.0" layoutY="74.0" text="по" />
+                                <TextField fx:id="timeToTextField" layoutX="165.0" layoutY="70.0" prefHeight="31.0" prefWidth="62.0" text="22:00" />
+                                <Label fx:id="label112" layoutX="252.0" layoutY="41.0" text="Період" />
+                                <Label fx:id="label1111" layoutX="383.0" layoutY="41.0" text="хв." />
+                                <Spinner fx:id="periodSpinner" editable="true" layoutX="300.0" layoutY="36.0" prefHeight="31.0" prefWidth="73.0">
+                                    <valueFactory>
+                                        <SpinnerValueFactory.IntegerSpinnerValueFactory max="100" min="1" />
+                                    </valueFactory>
+                                </Spinner>
+                                <Label layoutX="428.0" layoutY="51.0" text="Місць:" />
+                                <Spinner fx:id="transportPlacesSit" editable="true" layoutX="487.0" layoutY="34.0" prefHeight="31.0" prefWidth="73.0">
+                                    <valueFactory>
+                                        <SpinnerValueFactory.IntegerSpinnerValueFactory max="100" min="1" />
+                                    </valueFactory>
+                                </Spinner>
+                                <Label fx:id="label1121" layoutX="572.0" layoutY="37.0" text="сидячих" />
+                                <Label fx:id="label11111" layoutX="572.0" layoutY="68.0" prefHeight="17.0" prefWidth="62.0" text="стоячих" />
+                                <Spinner fx:id="transportPlacesStand" editable="true" layoutX="487.0" layoutY="63.0" prefHeight="31.0" prefWidth="73.0">
+                                    <valueFactory>
+                                        <SpinnerValueFactory.IntegerSpinnerValueFactory max="100" min="1" />
+                                    </valueFactory>
+                                </Spinner>
+                                <Label layoutX="472.0" layoutY="108.0" text="Обмеження місць"/>
+                                <Label fx:id="totalPlacesCountLabel" layoutX="610.0" layoutY="108.0" text="Label" />
+                                <Label fx:id="label11112" layoutX="543.0" layoutY="138.0" text="\% місць = " />
+                                <Spinner fx:id="maxPercentPlaces" editable="true" layoutX="464.0" layoutY="134.0" prefHeight="31.0" prefWidth="73.0">
+                                    <valueFactory>
+                                        <SpinnerValueFactory.IntegerSpinnerValueFactory max="100" min="1" />
+                                    </valueFactory>
+                                </Spinner>
+                                <Label fx:id="percentPlacesCountLabel" layoutX="610.0" layoutY="138.0" text="Label" />
+                            </children>
+                        </AnchorPane>
+                        <SplitPane dividerPositions="0.3568904593639576" prefHeight="579.0" prefWidth="742.0">
+                            <items>
+                                <SplitPane dividerPositions="0.5" maxWidth="-Infinity" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                                    <items>
+                                        <VBox>
+                                            <children>
+                                                <Button fx:id="resetFilter" mnemonicParsing="false" onAction="#resetFilterClicked" prefHeight="25.0" prefWidth="200.0" text="Зброс фільтру" />
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                    <children>
+                                                        <Label alignment="CENTER" prefHeight="21.0" prefWidth="199.0" text="Зупинки" textAlignment="CENTER" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <ListView fx:id="stopListView" maxWidth="199.0" prefHeight="577.0" prefWidth="331.0" />
+                                            </children>
+                                        </VBox>
+                                        <VBox>
+                                            <children>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                    <children>
+                                                        <Label alignment="CENTER" prefHeight="21.0" prefWidth="199.0" text="Транспорт" textAlignment="CENTER" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <ListView fx:id="transportListView" maxWidth="199.0" prefHeight="577.0" prefWidth="331.0" />
+                                            </children>
+                                        </VBox>
+                                    </items>
+                                </SplitPane>
+                                <VBox>
+                                    <children>
+                                        <AnchorPane prefHeight="113.0" prefWidth="535.0">
+                                            <children>
+                                                <TextFlow fx:id="textFlowStationInfo" prefHeight="107.0" prefWidth="535.0" />
+                                            </children>
+                                        </AnchorPane>
+                                        <TableView fx:id="logTable" prefHeight="482.0" prefWidth="535.0">
+                                            <columns>
+                                                <TableColumn prefWidth="75.0" text="Time" />
+                                                <TableColumn prefWidth="504.0" text="Log" />
+                                            </columns>
+                                            <opaqueInsets>
+                                                <Insets />
+                                            </opaqueInsets>
+                                        </TableView>
+                                    </children>
+                                </VBox>
+                            </items>
+                        </SplitPane>
+                    </children>
+                </VBox>
+                <TabPane prefHeight="579.0" prefWidth="560.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                        <Tab text="Візуалізація">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                                        <Region layoutX="-1.0" prefHeight="769.0" prefWidth="560.0" style="-fx-background-color: gray;" />
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Статистика">
+                            <content>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                    <children>
+                                        <LineChart fx:id="transportLineChart" prefHeight="327.0" prefWidth="568.0"
+                                                   title="Заповненість транспорту">
+                                            <xAxis>
+                                                <CategoryAxis fx:id="timeAxis" label="Час" side="BOTTOM" />
+                                            </xAxis>
+                                            <yAxis>
+                                                <NumberAxis fx:id="passengersAxis" label="Пасажири" side="LEFT" />
+                                            </yAxis>
+                                        </LineChart>
+                                        <LineChart fx:id="stopsLineChart" layoutX="14.0" layoutY="341.0"
+                                                   prefHeight="400.0" prefWidth="535.0" title="Заповненість зупинок">
+                                            <xAxis>
+                                                <CategoryAxis fx:id="timeAxis1" label="Час" side="BOTTOM"/>
+                                            </xAxis>
+                                            <yAxis>
+                                                <NumberAxis fx:id="passengersAxis1" label="Пасажири" side="LEFT"/>
+                                            </yAxis>
+                                        </LineChart>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Карта">
+                            <content>
+                                <WebView fx:id="gmaps" prefHeight="200.0" prefWidth="200.0" />
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+            </items>
+        </SplitPane>
+    </children>
+</VBox>
